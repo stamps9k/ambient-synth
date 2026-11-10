@@ -7,11 +7,7 @@ export type OscillatorWaveform = "sine" | "triangle" | "sawtooth" | "square";
 export type LfoTarget = "pitch" | "filter" | "amplitude";
 
 export type LfoWaveform =
-  | "sine"
-  | "triangle"
-  | "sawtooth"
-  | "square"
-  | "sample-and-hold";
+  "sine" | "triangle" | "sawtooth" | "square" | "sample-and-hold";
 
 export type MusicalScale =
   | "pentatonic-major"
