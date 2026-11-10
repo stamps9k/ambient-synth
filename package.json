@@ -1,19 +1,20 @@
 {
-  "name": "webgpu-particles",
+  "name": "ambient-synth",
   "version": "0.0.1",
-  "description": "An experimentation with webgpu. Used to implement a particle renderer.",
+  "description": "A library for generating ambient music / noise in the web browser using the Web Audio API.",
   "keywords": [
-    "webgpu",
-    "particles",
+    "web-audio",
+    "ambient",
+    "synth",
     "library"
   ],
-  "homepage": "https://github.com/stamps9k/webgpu-particles#readme",
+  "homepage": "https://github.com/stamps9k/ambient-synth#readme",
   "bugs": {
-    "url": "https://github.com/stamps9k/webgpu-particles/issues"
+    "url": "https://github.com/stamps9k/ambient-synth/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stamps9k/webgpu-particles.git"
+    "url": "git+https://github.com/stamps9k/ambient-synth.git"
   },
   "license": "ISC",
   "author": "James Stamp",
