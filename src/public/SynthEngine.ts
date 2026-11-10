@@ -37,17 +37,20 @@ export class SynthEngine {
   public async start(params?: Partial<SynthParams>): Promise<void> {
     if (this.running) return;
 
-    this.ctx = new AudioContext();
-    this.master_gain = this.ctx.createGain();
+    // Apply any new params first so the gain below uses them.
+    if (params) {
+      this.set_params(params);
+    }
+
+    // Reuse the context from init. Browsers create it suspended until a
+    // user gesture, so resume it here.
+    if (this.ctx.state === "suspended") {
+      await this.ctx.resume();
+    }
     this.master_gain.gain.setValueAtTime(
       this.params.dynamics.masterGain,
       this.ctx.currentTime,
     );
-    this.master_gain.connect(this.ctx.destination);
-
-    if (params) {
-      this.set_params(params);
-    }
     this.running = true;
   }
 

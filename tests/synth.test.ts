@@ -141,12 +141,40 @@ describe("SynthEngine lifecycle", () => {
     expect(internals(engine).running).toBe(true);
   });
 
+  it("applies params passed to start before setting the gain", async () => {
+    const engine = SynthEngine.init();
+    await engine.start({
+      dynamics: { masterGain: 0.4 } as SynthParams["dynamics"],
+    });
+    const ctx = internals(engine).ctx;
+    expect(ctx.gains[0].gain.setValueAtTime).toHaveBeenCalledWith(0.4, 0);
+    expect(internals(engine).params.dynamics.masterGain).toBe(0.4);
+  });
+
+  it("reuses the audio context created by init", async () => {
+    const engine = SynthEngine.init();
+    const ctx = internals(engine).ctx;
+    await engine.start();
+    expect(internals(engine).ctx).toBe(ctx);
+    expect(FakeAudioContext.created).toBe(1);
+    expect(ctx.gains).toHaveLength(1);
+  });
+
+  it("resumes a context the browser created suspended", async () => {
+    const engine = SynthEngine.init();
+    internals(engine).ctx.state = "suspended";
+    await engine.start();
+    expect(internals(engine).ctx.state).toBe("running");
+  });
+
   it("ignores a second start while running", async () => {
     const engine = SynthEngine.init();
     await engine.start();
-    const created = FakeAudioContext.created;
     await engine.start();
-    expect(FakeAudioContext.created).toBe(created);
+    expect(FakeAudioContext.created).toBe(1);
+    expect(
+      internals(engine).ctx.gains[0].gain.setValueAtTime,
+    ).toHaveBeenCalledTimes(1);
   });
 
   it("suspends and resumes the audio context", async () => {
