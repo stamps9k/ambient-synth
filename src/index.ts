@@ -11,7 +11,7 @@ export function hello_sound(): string {
 }
 
 /**
- * Initialize the system in preparation of use. Just a wrapper for the particle engine's init function.
+ * Initialize the system in preparation of use. Creates the SynthEngine and applies the given parameters.
  *
  * @param params - A set of parameters for the synth. A complete list of parameters is not required, any missing parameters will be filled in with defaults.
  *
