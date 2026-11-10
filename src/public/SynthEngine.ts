@@ -15,7 +15,8 @@ export class SynthEngine {
   ) {
     this.ctx = ctx;
     this.master_gain = master_gain;
-    this.params = DEFAULT_PARAMS;
+    // A copy, so merging never changes the shared defaults or another engine.
+    this.params = structuredClone(DEFAULT_PARAMS);
     this.merge_params(params);
     this.running = false;
   }
