@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/stamps9k/ambient-synth.git"
   },
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "author": "James Stamp",
   "type": "module",
   "main": "./index.mjs",
